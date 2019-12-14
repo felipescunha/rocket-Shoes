@@ -7,8 +7,8 @@ import Home from './pages/Home';
 const Routes = createAppContainer(
   createStackNavigator(
     {
-      Cart,
       Home,
+      Cart,
     },
     {
       headerLayouPreset: 'center',

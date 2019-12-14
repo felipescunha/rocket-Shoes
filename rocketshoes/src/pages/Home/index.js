@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {
+  Container,
+  ImageProduct,
+  TextPrice,
+  Description,
+  TextButton,
+} from './styles';
 
 export default class Home extends Component {
   static navigationOptions = () => ({
@@ -8,9 +16,21 @@ export default class Home extends Component {
 
   render() {
     return (
-      <View>
-        <Text>Home</Text>
-      </View>
+      <Container>
+        <ImageProduct
+          style={{ width: 250, height: 250 }}
+          source={{
+            uri:
+              'https://static.netshoes.com.br/produtos/tenis-olympikus-intense/12/D22-1310-012/D22-1310-012_zoom1.jpg',
+          }}
+        />
+        <Description>Tênis de caminhada leve e confortável</Description>
+        <TextPrice>R$179,90</TextPrice>
+        <TouchableOpacity>
+          <Icon name="add-shopping-cart" color="#FFF" size={20} />
+          <TextButton color="#fff">ADICIONAR</TextButton>
+        </TouchableOpacity>
+      </Container>
     );
   }
 }

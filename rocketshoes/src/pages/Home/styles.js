@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -19,9 +19,19 @@ export const List = styled.FlatList`
 export const Description = styled.Text`
   color: #fff;
 `;
+export const AddCartContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  margin-top: 10px;
+`;
 
 export const TextPrice = styled.Text`
+  margin-top: 5px;
   color: #fff;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 export const TextButton = styled.Text`

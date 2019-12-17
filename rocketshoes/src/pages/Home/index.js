@@ -7,6 +7,7 @@ import {
   TextPrice,
   Description,
   TextButton,
+  AddCartContainer,
 } from './styles';
 
 export default class Home extends Component {
@@ -26,10 +27,12 @@ export default class Home extends Component {
         />
         <Description>Tênis de caminhada leve e confortável</Description>
         <TextPrice>R$179,90</TextPrice>
-        <TouchableOpacity>
-          <Icon name="add-shopping-cart" color="#FFF" size={20} />
-          <TextButton color="#fff">ADICIONAR</TextButton>
-        </TouchableOpacity>
+        <AddCartContainer>
+          <Icon name="add-shopping-cart" color="#FFF" size={28} />
+          <TouchableOpacity>
+            <TextButton color="#fff">ADICIONAR</TextButton>
+          </TouchableOpacity>
+        </AddCartContainer>
       </Container>
     );
   }

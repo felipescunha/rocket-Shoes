@@ -8,11 +8,16 @@ export const Container = styled.View`
   border: 20px;
 `;
 
-export const ImageProduct = styled.Image``;
+export const ProductView = styled.View``;
+
+export const ImageProduct = styled.Image`
+  width: 200;
+  height: 200;
+`;
 
 export const List = styled.FlatList`
   flex: 1;
-  background: #c1c1c1;
+  background: #fff;
   padding: 30px;
 `;
 
@@ -20,11 +25,24 @@ export const Description = styled.Text`
   color: #fff;
 `;
 export const AddCartContainer = styled.View`
+  margin-top: 10px;
+`;
+
+export const TextButton = styled.Text`
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  border-radius: 4px;
+  align-items: center;
+`;
+
+export const AddCart = styled.TouchableOpacity`
   flex-direction: row;
-  justify-content: space-between;
   align-content: center;
   align-items: center;
-  margin-top: 10px;
+  background: #7159c1;
+  border-radius: 4px;
 `;
 
 export const TextPrice = styled.Text`
@@ -32,12 +50,4 @@ export const TextPrice = styled.Text`
   color: #fff;
   font-size: 20px;
   font-weight: bold;
-`;
-
-export const TextButton = styled.Text`
-  margin-top: 15px;
-  padding: 10px 40px;
-  color: #fff;
-  background: #7159c1;
-  border-radius: 4px;
 `;

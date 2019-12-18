@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React from 'react';
+import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import api from '../../services/api';
+import { formatPrice } from '../../util/format';
+
 import {
   Container,
   ImageProduct,
@@ -8,32 +12,60 @@ import {
   Description,
   TextButton,
   AddCartContainer,
+  AddCart,
+  ProductView,
 } from './styles';
 
-export default class Home extends Component {
-  static navigationOptions = () => ({
-    title: 'Rockertshoes | Home',
-  });
+class Home extends React.Component {
+  state = {
+    products: [],
+  };
+
+  async componentDidMount() {
+    const response = await api.get('/products');
+
+    const result = response.data.map(product => ({
+      ...product,
+      priceFormated: Number(product.price).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }),
+    }));
+
+    this.setState({ products: result });
+  }
 
   render() {
+    const { products } = this.state;
     return (
       <Container>
-        <ImageProduct
-          style={{ width: 250, height: 250 }}
-          source={{
-            uri:
-              'https://static.netshoes.com.br/produtos/tenis-olympikus-intense/12/D22-1310-012/D22-1310-012_zoom1.jpg',
+        <FlatList
+          data={products}
+          keyExtractor={product => String(product.id)}
+          renderItem={({ item }) => {
+            return (
+              <ProductView>
+                <ImageProduct source={{ uri: item.image }} />
+                <Description>{item.title}</Description>
+                <TextPrice>{formatPrice(item.price)}</TextPrice>
+                <AddCartContainer>
+                  <AddCart>
+                    <Icon
+                      name="add-shopping-cart"
+                      color="#FFF"
+                      size={28}
+                      padding={10}
+                    />
+                    <TextButton color="#fff">ADICIONAR</TextButton>
+                  </AddCart>
+                </AddCartContainer>
+              </ProductView>
+            );
           }}
         />
-        <Description>Tênis de caminhada leve e confortável</Description>
-        <TextPrice>R$179,90</TextPrice>
-        <AddCartContainer>
-          <Icon name="add-shopping-cart" color="#FFF" size={28} />
-          <TouchableOpacity>
-            <TextButton color="#fff">ADICIONAR</TextButton>
-          </TouchableOpacity>
-        </AddCartContainer>
       </Container>
     );
   }
 }
+
+export default Home;

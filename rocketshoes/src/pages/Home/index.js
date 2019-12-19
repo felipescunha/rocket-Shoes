@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
@@ -7,13 +7,15 @@ import { formatPrice } from '../../util/format';
 
 import {
   Container,
-  ImageProduct,
-  TextPrice,
-  Description,
-  TextButton,
-  AddCartContainer,
-  AddCart,
+  ProductImage,
+  ProductPrice,
+  ProductTitle,
+  ProductButton,
+  BoxAmount,
+  ProductAmountText,
+  ProductList,
   ProductView,
+  TextButton,
 } from './styles';
 
 class Home extends React.Component {
@@ -37,28 +39,33 @@ class Home extends React.Component {
 
   render() {
     const { products } = this.state;
+    // const { amount } = this.props;
     return (
       <Container>
-        <FlatList
+        <ProductList
+          horizontal
           data={products}
           keyExtractor={product => String(product.id)}
           renderItem={({ item }) => {
             return (
               <ProductView>
-                <ImageProduct source={{ uri: item.image }} />
-                <Description>{item.title}</Description>
-                <TextPrice>{formatPrice(item.price)}</TextPrice>
-                <AddCartContainer>
-                  <AddCart>
+                <ProductImage source={{ uri: item.image }} />
+                <ProductTitle>{item.title}</ProductTitle>
+                <ProductPrice>{formatPrice(item.price)}</ProductPrice>
+                <ProductButton onPress={() => this.handleAddProduct(item.id)}>
+                  <BoxAmount>
                     <Icon
                       name="add-shopping-cart"
                       color="#FFF"
-                      size={28}
+                      size={20}
                       padding={10}
                     />
-                    <TextButton color="#fff">ADICIONAR</TextButton>
-                  </AddCart>
-                </AddCartContainer>
+                    <ProductAmountText>
+                      0{/* {amount[item.id] || 0} */}
+                    </ProductAmountText>
+                  </BoxAmount>
+                  <TextButton color="#fff">ADICIONAR</TextButton>
+                </ProductButton>
               </ProductView>
             );
           }}

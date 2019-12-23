@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
 import { formatPrice } from '../../util/format';
+import * as CartAction from '../../store/modules/cart/actions';
 
 import {
   Container,
@@ -18,7 +22,7 @@ import {
   TextButton,
 } from './styles';
 
-class Home extends React.Component {
+class Home extends Component {
   state = {
     products: [],
   };
@@ -37,6 +41,14 @@ class Home extends React.Component {
     this.setState({ products: result });
   }
 
+  handleAddProduct = product => {
+    const { navigation, addToCart } = this.props;
+
+    addToCart(product);
+
+    navigation.navigate('Cart', { product });
+  };
+
   render() {
     const { products } = this.state;
     // const { amount } = this.props;
@@ -45,7 +57,7 @@ class Home extends React.Component {
         <ProductList
           horizontal
           data={products}
-          keyExtractor={product => String(product.id)}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => {
             return (
               <ProductView>
@@ -75,4 +87,5 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapDispatchToProps = dispatch => bindActionCreators(CartAction, dispatch);
+export default connect(null, mapDispatchToProps)(Home);

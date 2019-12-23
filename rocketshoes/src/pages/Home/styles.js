@@ -8,6 +8,13 @@ export const Container = styled.View`
   background: #171720;
 `;
 
+export const ProductList = styled.FlatList.attrs({
+  showsHorizontalScrollIndicator: false,
+})`
+  flex: 1;
+  padding: 20px;
+`;
+
 export const ProductView = styled.View`
   padding: 15px;
   background: #fff;
@@ -21,13 +28,6 @@ export const ProductView = styled.View`
 export const ProductImage = styled.Image`
   width: 200;
   height: 200;
-`;
-
-export const ProductList = styled.FlatList.attrs({
-  showsHorizontalScrollIndicator: false,
-})`
-  flex: 1;
-  padding: 20px;
 `;
 
 export const ProductTitle = styled.Text.attrs({

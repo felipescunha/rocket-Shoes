@@ -96,3 +96,13 @@ export const TextOrderButton = styled.Text`
 export const Footer = styled.View`
   margin-bottom: 20px;
 `;
+export const EmptyContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const EmptyText = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 18px;
+`;

@@ -46,7 +46,7 @@ function Cart({ navigation, products, total }) {
                 <AmountNumberBox>
                   <Icon name="add-circle-outline" size={25} />
                   <NumberAmountView>
-                    <NumberAmount>{product.amount}</NumberAmount>
+                    <NumberAmount>{String(product.amount)}</NumberAmount>
                   </NumberAmountView>
                   <Icon name="remove-circle-outline" size={25} />
                 </AmountNumberBox>

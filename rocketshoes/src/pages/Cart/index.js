@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import cart from '../../store/modules/rootReducer';
-
-// import * as CartActions from '../../store/modules/cart/actions';
+import * as CartActions from '../../store/modules/cart/actions';
 import { formatPrice } from '../../util/format';
 
 import {
@@ -22,54 +20,68 @@ import {
   ProductTotal,
   OrderButton,
   TextOrderButton,
-  StyleBox,
   DescriptionBox,
   BoxAmountSubTotal,
   NumberAmountView,
   ProductView,
+  Product,
+  Footer,
 } from './styles';
 
-function Cart({ product }) {
+function Cart({ navigation, products, total }) {
   return (
     <Container>
-      <StyleBox>
-        <ProductList
-          data={product}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => {
-            return (
-              <ProductView>
-                <ProductBox>
-                  <ProductImage source={{ uri: item.image }} />
-                  <DescriptionBox>
-                    <ProductTitle>{item.title}</ProductTitle>
-                    <ProductPrice>R$198,90</ProductPrice>
-                  </DescriptionBox>
-                </ProductBox>
-                <BoxAmountSubTotal>
-                  <AmountNumberBox>
-                    <Icon name="add-circle-outline" size={25} />
-                    <NumberAmountView>
-                      <NumberAmount>{item.amount}</NumberAmount>
-                    </NumberAmountView>
-                    <Icon name="remove-circle-outline" size={25} />
-                  </AmountNumberBox>
-                  <SubTotal>R$198,90</SubTotal>
-                </BoxAmountSubTotal>
-              </ProductView>
-            );
-          }}
-        />
+      <ProductList>
+        {products.map(product => (
+          <Product key={product.id}>
+            <ProductView>
+              <ProductBox>
+                <ProductImage source={{ uri: product.image }} />
+                <DescriptionBox>
+                  <ProductTitle>{product.title}</ProductTitle>
+                  <ProductPrice>{product.priceFormatted}</ProductPrice>
+                </DescriptionBox>
+              </ProductBox>
+              <BoxAmountSubTotal>
+                <AmountNumberBox>
+                  <Icon name="add-circle-outline" size={25} />
+                  <NumberAmountView>
+                    <NumberAmount>{product.amount}</NumberAmount>
+                  </NumberAmountView>
+                  <Icon name="remove-circle-outline" size={25} />
+                </AmountNumberBox>
+                <SubTotal>{product.subTotal}</SubTotal>
+              </BoxAmountSubTotal>
+            </ProductView>
+          </Product>
+        ))}
+      </ProductList>
+      <Footer>
         <TextTotal>TOTAL</TextTotal>
-        <ProductTotal>R$1469,10</ProductTotal>
+        <ProductTotal>{total}</ProductTotal>
         <OrderButton>
           <TextOrderButton>FINALIZAR PEDIDO</TextOrderButton>
         </OrderButton>
-      </StyleBox>
+      </Footer>
     </Container>
   );
 }
 
-export default connect(state => ({
-  product: state.cart,
-}))(Cart);
+const mapStateToProps = state => ({
+  products: state.cart.map(product => ({
+    ...product,
+    priceFormatted: formatPrice(product.price),
+    subTotal: formatPrice(product.price * product.amount),
+  })),
+  total: formatPrice(
+    state.cart.reduce(
+      (total, product) => total + product.price * product.amount,
+      0
+    )
+  ),
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -1,24 +1,15 @@
 import styled from 'styled-components';
 
 export const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  background: #171720;
-`;
-export const StyleBox = styled.View`
   margin: 30px;
   background: #fff;
   border-radius: 4px;
   padding: 15px;
-  height: 400px;
 `;
 
-export const ProductList = styled.FlatList.attrs({
-  showsHorizontalScrollIndicator: false,
-})`
-  flex: 1;
-  padding: 20px;
-`;
+export const Product = styled.View``;
+
+export const ProductList = styled.View``;
 
 export const ProductView = styled.View``;
 
@@ -100,4 +91,8 @@ export const TextOrderButton = styled.Text`
   font-size: 15px;
   color: #fff;
   font-weight: bold;
+`;
+
+export const Footer = styled.View`
+  margin-bottom: 20px;
 `;

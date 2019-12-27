@@ -30,15 +30,12 @@ class Home extends Component {
   async componentDidMount() {
     const response = await api.get('/products');
 
-    const result = response.data.map(product => ({
+    const data = response.data.map(product => ({
       ...product,
-      priceFormated: Number(product.price).toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }),
+      priceFormated: formatPrice(product.price),
     }));
 
-    this.setState({ products: result });
+    this.setState({ products: data });
   }
 
   handleAddProduct = product => {
@@ -46,7 +43,7 @@ class Home extends Component {
 
     addToCart(product);
 
-    navigation.navigate('Cart', { product });
+    navigation.navigate('Cart');
   };
 
   render() {
@@ -57,6 +54,7 @@ class Home extends Component {
         <ProductList
           horizontal
           data={products}
+          extraData={this.props}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => {
             return (
@@ -64,7 +62,7 @@ class Home extends Component {
                 <ProductImage source={{ uri: item.image }} />
                 <ProductTitle>{item.title}</ProductTitle>
                 <ProductPrice>{formatPrice(item.price)}</ProductPrice>
-                <ProductButton onPress={() => this.handleAddProduct(item.id)}>
+                <ProductButton onPress={() => this.handleAddProduct(item)}>
                   <BoxAmount>
                     <Icon
                       name="add-shopping-cart"

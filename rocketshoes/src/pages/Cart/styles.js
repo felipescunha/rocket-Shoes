@@ -1,22 +1,25 @@
 import styled from 'styled-components';
 
 export const Container = styled.View`
-  margin: 30px;
+  margin:  25px;
   background: #fff;
   border-radius: 4px;
-  padding: 15px;
+  padding: 5px;
 `;
 
 export const Product = styled.View``;
 
 export const ProductList = styled.View``;
 
-export const ProductView = styled.View``;
+export const ProductView = styled.View`
+
+`;
 
 export const ProductBox = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
+
+flex-direction: row;
   align-items: center;
+
 `;
 
 export const ProductImage = styled.Image`
@@ -24,7 +27,11 @@ export const ProductImage = styled.Image`
   height: 80;
 `;
 
-export const DescriptionBox = styled.View``;
+export const DescriptionBox = styled.View`
+  flex: 1;
+  margin-left: 10px;
+  padding: 10px;
+`;
 
 export const ProductTitle = styled.Text``;
 
@@ -60,6 +67,10 @@ export const NumberAmount = styled.Text`
   align-self: center;
 `;
 
+export const ProductDelete = styled.TouchableOpacity`
+  padding-right: 16px;
+`;
+
 export const SubTotal = styled.Text`
   font-weight: bold;
   font-size: 16px;
@@ -77,7 +88,7 @@ export const ProductTotal = styled.Text`
   align-self: center;
   font-size: 32px;
   font-weight: bold;
-  padding-bottom: 25px;
+  padding-bottom: 15px;
 `;
 
 export const OrderButton = styled.TouchableOpacity`
@@ -94,7 +105,7 @@ export const TextOrderButton = styled.Text`
 `;
 
 export const Footer = styled.View`
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 `;
 export const EmptyContainer = styled.View`
   align-items: center;
@@ -106,3 +117,6 @@ export const EmptyText = styled.Text`
   font-weight: bold;
   margin-top: 18px;
 `;
+
+
+export const QuantityButton = styled.TouchableOpacity``;

@@ -28,9 +28,23 @@ import {
   Footer,
   EmptyText,
   EmptyContainer,
+  QuantityButton,
+  ProductDelete
 } from './styles';
 
-function Cart({ navigation, products, total }) {
+
+
+function Cart({ products, total, updateItem,removeFromCart }) {
+
+  function increment(product) {
+    updateItem(product.id, product.amount + 1)
+
+  }
+
+  function  decrement(product) {
+    updateItem(product.id, product.amount - 1)
+  }
+
   return (
     <Container>
       {products.length ? (
@@ -45,14 +59,21 @@ function Cart({ navigation, products, total }) {
                       <ProductTitle>{product.title}</ProductTitle>
                       <ProductPrice>{product.priceFormatted}</ProductPrice>
                     </DescriptionBox>
+                    <ProductDelete onPress={() => removeFromCart(product.id)}>
+                      <Icon name="delete-forever" size={24} color={'#7159c1'} />
+                    </ProductDelete>
                   </ProductBox>
                   <BoxAmountSubTotal>
-                    <AmountNumberBox>
-                      <Icon name="add-circle-outline" size={25} />
+                  <AmountNumberBox>
+                    <QuantityButton onPress={() => increment(product)}>
+                      <Icon name="add-circle-outline" size={25}/>
+                    </QuantityButton>
                       <NumberAmountView>
                         <NumberAmount>{String(product.amount)}</NumberAmount>
                       </NumberAmountView>
+                    <QuantityButton onPress={() => decrement(product)}>
                       <Icon name="remove-circle-outline" size={25} />
+                    </QuantityButton>
                     </AmountNumberBox>
                     <SubTotal>{product.subTotal}</SubTotal>
                   </BoxAmountSubTotal>

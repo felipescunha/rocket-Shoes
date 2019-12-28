@@ -1,11 +1,9 @@
 import produce from 'immer';
 
 export default function cart(state = [], action) {
-  console.tron.log(action);
-  console.tron.log(state);
 
   switch (action.type) {
-    case '@cart/ADD_TO_CART':
+    case '@cart/ADD_SUCCESS':
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.product.id);
 

@@ -38,10 +38,10 @@ class Home extends Component {
     this.setState({ products: data });
   }
 
-  handleAddProduct = product => {
-    const { navigation, addToCart } = this.props;
+  handleAddProduct = id => {
+    const { navigation, addToCartRequest } = this.props;
 
-    addToCart(product);
+    addToCartRequest(id);
 
     navigation.navigate('Cart');
   };
@@ -62,7 +62,7 @@ class Home extends Component {
                 <ProductImage source={{ uri: item.image }} />
                 <ProductTitle>{item.title}</ProductTitle>
                 <ProductPrice>{formatPrice(item.price)}</ProductPrice>
-                <ProductButton onPress={() => this.handleAddProduct(item)}>
+                <ProductButton onPress={() => this.handleAddProduct(item.id)}>
                   <BoxAmount>
                     <Icon
                       name="add-shopping-cart"

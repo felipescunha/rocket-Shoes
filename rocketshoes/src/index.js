@@ -1,10 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-
 import { Provider } from 'react-redux';
 import './config/ReactotronConfig';
 
-// import 'react-native-gesture-handler';
+
 import Routes from './routes';
 import store from './store';
 

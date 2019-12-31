@@ -12,15 +12,23 @@ export function addToCartSuccess(product) {
   };
 };
 
-export function updateItem(id, amount) {
+export function updateAmountRequest(id, amount) {
   return {
-    type: '@cart/UPDATE_AMOUNT',
+    type: '@cart/UPDATE_AMOUNT_REQUEST',
     id,
     amount,
   };
 }
 
-export function removeFromCart(id, amount) {
+export function updateAmountSuccess(id, amount) {
+  return {
+    type: '@cart/UPDATE_AMOUNT_SUCCESS',
+    id,
+    amount,
+  };
+}
+
+export function removeFromCart(id) {
   return {
     type: '@cart/REMOVE_FROM_CART',
     id,

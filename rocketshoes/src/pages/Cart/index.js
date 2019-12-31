@@ -34,15 +34,15 @@ import {
 
 
 
-function Cart({ products, total, updateItem,removeFromCart }) {
+function Cart({ products, total, updateAmountRequest,removeFromCart }) {
 
   function increment(product) {
-    updateItem(product.id, product.amount + 1)
+    updateAmountRequest(product.id, product.amount + 1)
 
   }
 
   function  decrement(product) {
-    updateItem(product.id, product.amount - 1)
+    updateAmountRequest(product.id, product.amount - 1)
   }
 
   return (
